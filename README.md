@@ -56,6 +56,8 @@ yarn build
 bun run build
 ```
 
+**IMPORTANT**: Edit markdown files in `content` direcory.
+
 Locally preview production build:
 
 ```bash

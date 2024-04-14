@@ -13,7 +13,9 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // ... options
+    markdown: {
+      anchorLinks: false,
+    },
   },
 
   runtimeConfig: {
