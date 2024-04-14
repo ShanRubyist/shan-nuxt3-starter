@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/ui", "@nuxtjs/sitemap"],
+  modules: ["@nuxt/ui", "@nuxtjs/sitemap", "@nuxt/content"],
 
   colorMode: {
     preference: 'system'
@@ -10,6 +10,10 @@ export default defineNuxtConfig({
 
   sitemap: {
     // xslTips: false,
+  },
+
+  content: {
+    // ... options
   },
 
   runtimeConfig: {
