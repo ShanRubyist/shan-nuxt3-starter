@@ -12,5 +12,12 @@ export default defineNuxtConfig({
     // xslTips: false,
   },
 
+  runtimeConfig: {
+    public: {
+      endpoint: process.env.NUXT_PUBLIC_API_ENDPOINT,
+      siteURL: process.env.NUXT_PUBLIC_SITE_URL
+    },
+  },
+
   devtools: { enabled: true }
 })
