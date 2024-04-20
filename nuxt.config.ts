@@ -82,5 +82,13 @@ export default defineNuxtConfig({
     },
   },
 
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener noreferrer nofollow'
+      }
+    }
+  },
+
   devtools: { enabled: true }
 })
