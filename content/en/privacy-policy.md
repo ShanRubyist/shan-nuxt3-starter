@@ -1,10 +1,4 @@
----
-title: 'Privacy Policy'
-effective_date: 'March 27, 2024'
-site_url: 'https://xxx.top'
-email: 'hi@xxx.top'
----
-***Effective Date: {{$doc.effective_date}}***
+***Effective Date: March 27, 2024***
 
 Your privacy is important to us. This Privacy Policy explains how we collect, use, protect, and handle your personal information on our website located at {{$doc.site_url}} (“Website”). This policy applies to all users of the Website.
 

@@ -83,6 +83,13 @@
                         <a href="#"
                             class="font-inter rounded-lg pb-8 hover:text-[#c9fd02] lg:px-6 lg:py-4 lg:pb-0">FAQs</a>
                     </div>
+
+                    <USelect :options="supportedLocaleNames" model-value="{{locale.name}}" @change="onLocaleChanged">
+                        <!-- <template #leading>
+                            <UIcon name="i-heroicons-arrow-up-circle" class="w-5 h-5" />
+                        </template> -->
+                    </USelect>
+                    
                     <!-- MENU CONTENT 2 -->
                     <div class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
                         x-bind:class="isOpen ? 'show' : 'hidden'">
@@ -105,8 +112,26 @@
                                 fill="currentColor"></path>
                         </svg>
                     </a>
+
                 </div>
             </nav>
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+const { locale, locales } = useI18n()
+
+const supportedLocaleNames = computed(() => {
+  return locales.value.map(i => i.name)
+})
+
+const switchLocalePath = useSwitchLocalePath()
+const router = useRouter()
+
+function onLocaleChanged(event: Event) {
+    const selectedLocale = locales.value.find(i => i.name === event)
+
+    router.push({ path: switchLocalePath(selectedLocale.code) })
+}
+</script>

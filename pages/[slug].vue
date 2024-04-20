@@ -13,14 +13,18 @@
             <div class="mx-auto w-full max-w-5xl py-12 md:py-16 lg:py-20">
 
                 <!-- Content -->
-                <ContentDoc class="prose" />
+                <!-- <ContentDoc class="prose" /> -->
+                <ContentRendererMarkdown :value="md" :data="mdcVars" class="prose"/>
             </div>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
+
 let { slug } = useRoute().params
+const { locale, t } = useI18n()
+const config = useRuntimeConfig().public
 
 if (slug != "privacy-policy" && slug != "terms-of-service") {
     navigateTo({
@@ -28,8 +32,17 @@ if (slug != "privacy-policy" && slug != "terms-of-service") {
     })
 }
 
-let title = slug
-    .split("-")
-    .map(word => word.toUpperCase())
-    .join(" ");
+useHead({
+    title: t('privacy-policy'),
+})
+
+const { data: md } = await useAsyncData(() => queryContent(locale.value, slug).findOne());
+const mdcVars = ref({
+    site_name: config.siteName,
+    email: config.email,
+    site_url: config.siteURL
+});
+
+
+let title = t('privacy-policy') + ' | ' + config.siteName
 </script>
