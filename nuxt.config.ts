@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 
   sitemap: {
     // xslTips: false,
+    strictNuxtContentPaths: true
   },
 
   content: {
@@ -78,7 +79,9 @@ export default defineNuxtConfig({
       siteURL: process.env.NUXT_PUBLIC_SITE_URL,
       siteName: process.env.NUXT_PUBLIC_SITE_NAME,
       email: process.env.NUXT_PUBLIC_EMAIL,
-      effectiveDate: process.env.NUXT_PUBLIC_EFFECTIVE_DATE
+      has_login: process.env.NUXT_PUBLIC_HAS_LOGIN,
+      email_login: process.env.NUXT_PUBLIC_EMAIL_LOGIN,
+      google_oauth_login: process.env.NUXT_PUBLIC_GOOGLE_OAUTH_LOGIN,
     },
   },
 

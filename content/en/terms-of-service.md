@@ -1,3 +1,7 @@
+---
+sitemap:
+  loc: 'terms-of-service'
+---
 ***Effective Date: March 27, 2024***
 
 These Terms of Service (“Terms”) govern your use of the {{$doc.site_name}} website located at {{$doc.site_url}} (“Website”), including all content, services, and products available at or through the website. The Website is owned and operated by {{$doc.site_name}} (“we”, “us”, or “our”).

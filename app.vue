@@ -5,6 +5,8 @@
         <NuxtPage />
       <Footer />
       
+      <UNotifications />
+      
     </NuxtLayout>
   </div>
 </template>
@@ -21,16 +23,17 @@ const i18nHead = useLocaleHead({
 })
 
 useHead({
-  title: "",
-  titleTemplate: (title) => { return title === '' ? config.siteName : `${title} | ${config.siteName}` },
+  title: t("title"),
+  titleTemplate: (title) => { return title === '' ? config.siteName : `${config.siteName} | ${title}` },
   htmlAttrs: {
     lang: i18nHead.value.htmlAttrs!.lang
   },
   meta: [
     { charset: "utf-8" },
     { name: "viewport", content: "width=device-width, initial-scale=1" },
-    { name: "description", content: t("hello") },
+    { name: "description", content: t("description") },
     { name: "format-detection", content: "telephone=no" },
+    {name: "http-equiv", content: "restrict-properties"},
     ...i18nHead.value.meta
   ],
   link: [

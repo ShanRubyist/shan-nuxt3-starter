@@ -1,5 +1,4 @@
 <template>
-
     <section>
         <div class="flex flex-col items-center justify-center px-5 md:px-10">
             <!-- Title Container -->
@@ -26,23 +25,23 @@ let { slug } = useRoute().params
 const { locale, t } = useI18n()
 const config = useRuntimeConfig().public
 
-if (slug != "privacy-policy" && slug != "terms-of-service") {
-    navigateTo({
-        path: '/'
-    })
+const { data: md } = await useAsyncData(() => queryContent(locale.value || config.defaultLocale, ...slug).findOne());
+if (!md.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-useHead({
-    title: t('privacy-policy'),
-})
-
-const { data: md } = await useAsyncData(() => queryContent(locale.value, slug).findOne());
 const mdcVars = ref({
     site_name: config.siteName,
     email: config.email,
     site_url: config.siteURL
 });
 
+useHead({
+    title: md.value.title,
+    meta: [
+    { name: "description", content: md.value.description }
+  ]
+})
 
-let title = t('privacy-policy') + ' | ' + config.siteName
+let title = t(slug.length > 1 ? slug[1] : slug[0]) + ' | ' + config.siteName
 </script>
