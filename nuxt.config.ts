@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/ui", "@nuxtjs/sitemap", "@nuxt/content", "@nuxtjs/i18n"],
+  modules: ["@nuxt/ui", "@nuxtjs/sitemap", "@nuxt/content", "@nuxtjs/i18n", "@pinia/nuxt"],
 
   colorMode: {
     preference: 'system'
