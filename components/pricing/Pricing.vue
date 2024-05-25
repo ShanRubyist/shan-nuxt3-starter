@@ -7,11 +7,39 @@
             <!-- Pricing Title -->
             <div class="text-center">
                 <h2 class="text-3xl font-bold md:text-5xl">Simple & Affordable Pricing</h2>
-                <p class="mx-auto mb-8 mt-4 max-w-lg text-[#636262] md:mb-12 lg:mb-16">Simple & fixed pricing. 30 days
-                    money-back guarantee</p>
+                <p class="mx-auto">Simple & fixed pricing. 30 days money-back guarantee</p>
+                <p class="mx-auto mb-8 mt-4 max-w-lg text-[#636262] md:mb-12 lg:mb-16">
+                    For inquiries or assistance, please contact us at
+                    <a :href="'mailto:' + email" class="text-blue-500">{{ email }}</a>
+                </p>
             </div>
             <!-- Pricing Table -->
             <div class="hidden text-center md:block">
+                <div
+                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-8 pt-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] mb-8">
+                    <div></div>
+                    <div>
+                        <a href="#"
+                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
+                            Started</a>
+                    </div>
+                    <div>
+                        <a @click="checkout(price_1)"
+                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
+                            Started</a>
+                    </div>
+                    <div>
+                        <a @click="checkout(price_2)"
+                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
+                            Started</a>
+                    </div>
+                    <div>
+                        <a @click="checkout(price_3)"
+                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
+                            Started</a>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-4">
                     <div class=""></div>
                     <div class="">
@@ -117,29 +145,6 @@
                     <div>
                         <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
                             alt="" class="inline-block" />
-                    </div>
-                </div>
-                <div class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-8 pt-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div></div>
-                    <div>
-                        <a href="#"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
                     </div>
                 </div>
             </div>
@@ -274,7 +279,12 @@
                         </div>
                         <p>-</p>
                     </div>
-                    <a href="#"
+                    <!-- <a v-if='has_active_subscription' @click="checkout(price_1)" 
+                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
+                        <p class="mr-6">Get Started</p>
+                    </a>
+                    <p v-else class="mt-8 inline-block gray">Your current plan</p> -->
+                    <a @click="checkout(price_1)"
                         class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
                         <p class="mr-6">Get Started</p>
                     </a>
@@ -342,7 +352,7 @@
                         </div>
                         <p>-</p>
                     </div>
-                    <a href="#"
+                    <a @click="checkout(price_2)"
                         class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
                         <p class="mr-6">Get Started</p>
                     </a>
@@ -411,7 +421,7 @@
                         <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
                             alt="" class="inline-block" />
                     </div>
-                    <a href="#"
+                    <a @click="checkout(price_3)"
                         class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
                         <p class="mr-6">Get Started</p>
                     </a>
@@ -420,3 +430,112 @@
         </div>
     </section>
 </template>
+<script setup>
+import { initializePaddle } from '@paddle/paddle-js'
+import { useMainStore } from '~/store'
+
+const config = useRuntimeConfig().public
+const pay_success_url = config.pay_success_url
+const email = config.email
+
+
+let { data: payment_info } = await useAsyncData("payment_info", async () => {
+    let resp = await request("/api/v1/payment_info", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    return resp.data;
+});
+
+const payment_processor = payment_info.value.payment_processor
+const paddle_billing_environment = payment_info.value.paddle_billing_environment
+const paddle_billing_client_token = payment_info.value.paddle_billing_client_token
+const price_1 = payment_info.value.price_1
+const price_2 = payment_info.value.price_2
+const price_3 = payment_info.value.price_3
+
+let { data: info } = await useAsyncData("active_subscription_info", async () => {
+    let resp = await request("/api/v1/active_subscription_info", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    return resp.data;
+});
+
+const has_active_subscription = info.value.has_active_subscription;
+const active_subscriptions = info.value.active_subscriptions;
+// console.log(active_subscriptions)
+
+const { locale } = useI18n()
+let localeValue = locale.value || config.defaultLocale
+const { notify } = useNotify()
+
+let store = useMainStore()
+function paddle_checkout(priceId, successUrl = pay_success_url) {
+
+    initializePaddle({ environment: paddle_billing_environment, token: paddle_billing_client_token }).then(
+        (paddleInstance) => {
+            if (paddleInstance) {
+                paddleInstance.Checkout.open({
+                    items: [{
+                        priceId: priceId,
+                        quantity: 1
+                    }],
+                    settings: {
+                        displayMode: "overlay",
+                        locale: localeValue,
+                        allowLogout: false,
+                        successUrl: pay_success_url,
+                    },
+                    customer: {
+                        email: store.userInfo.email,
+                    },
+                    customData: {
+                        "crm_id": 1,
+                        "utm_source": "web"
+                    },
+                });
+            }
+        },
+    );
+}
+
+function stripe_checkout(priceId, successUrl = pay_success_url) {
+    navigateTo(
+        config.endpoint + "/stripe_checkout?locale=" + localeValue + "&price=" + priceId + "&success_url=" + successUrl,
+        { external: true }
+    );
+
+}
+
+async function paddle_customer() {
+    const resp = await request("/paddle_customer", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    return resp
+}
+
+async function checkout(priceId) {
+    if (payment_processor === 'paddle_billing') {
+        let resp = await paddle_customer()
+
+        if (resp.status === 200) {
+            paddle_checkout(priceId)
+        }
+        else {
+            notify('error', 'paddle customer error')
+        }
+    }
+    else if (payment_processor === 'stripe') {
+        stripe_checkout(priceId)
+    }
+}
+
+</script>

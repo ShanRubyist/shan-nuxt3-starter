@@ -10,10 +10,19 @@ export default defineNuxtConfig({
 
   sitemap: {
     // xslTips: false,
-    strictNuxtContentPaths: true
+      strictNuxtContentPaths: true
+      // sitemaps: {
+      //   posts: {
+      //     include: [
+      //       '/',
+      //       '/content/blog/**',
+      //     ],
+      //   }
+      // }
   },
 
   content: {
+    // documentDriven: true,
     markdown: {
       anchorLinks: false,
     },
@@ -82,6 +91,7 @@ export default defineNuxtConfig({
       has_login: process.env.NUXT_PUBLIC_HAS_LOGIN,
       email_login: process.env.NUXT_PUBLIC_EMAIL_LOGIN,
       google_oauth_login: process.env.NUXT_PUBLIC_GOOGLE_OAUTH_LOGIN,
+      pay_success_url: process.env.NUXT_PUBLIC_PAY_SUCCESS_URL,
     },
   },
 
@@ -91,6 +101,10 @@ export default defineNuxtConfig({
         externalRelAttribute: 'noopener noreferrer nofollow'
       }
     }
+  },
+
+  router: {
+    // middleware: "auth",
   },
 
   devtools: { enabled: true }
