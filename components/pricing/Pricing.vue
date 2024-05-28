@@ -430,6 +430,7 @@
         </div>
     </section>
 </template>
+
 <script setup>
 import { initializePaddle } from '@paddle/paddle-js'
 import { useMainStore } from '~/store'
@@ -438,7 +439,6 @@ const config = useRuntimeConfig().public
 const pay_success_url = config.pay_success_url
 const email = config.email
 
-
 let { data: payment_info } = await useAsyncData("payment_info", async () => {
     let resp = await request("/api/v1/payment_info", {
         method: "GET",
@@ -446,6 +446,7 @@ let { data: payment_info } = await useAsyncData("payment_info", async () => {
             "Content-Type": "application/json",
         },
     });
+
     return resp.data;
 });
 
@@ -475,42 +476,6 @@ let localeValue = locale.value || config.defaultLocale
 const { notify } = useNotify()
 
 let store = useMainStore()
-function paddle_checkout(priceId, successUrl = pay_success_url) {
-
-    initializePaddle({ environment: paddle_billing_environment, token: paddle_billing_client_token }).then(
-        (paddleInstance) => {
-            if (paddleInstance) {
-                paddleInstance.Checkout.open({
-                    items: [{
-                        priceId: priceId,
-                        quantity: 1
-                    }],
-                    settings: {
-                        displayMode: "overlay",
-                        locale: localeValue,
-                        allowLogout: false,
-                        successUrl: pay_success_url,
-                    },
-                    customer: {
-                        email: store.userInfo.email,
-                    },
-                    customData: {
-                        "crm_id": 1,
-                        "utm_source": "web"
-                    },
-                });
-            }
-        },
-    );
-}
-
-function stripe_checkout(priceId, successUrl = pay_success_url) {
-    navigateTo(
-        config.endpoint + "/stripe_checkout?locale=" + localeValue + "&price=" + priceId + "&success_url=" + successUrl,
-        { external: true }
-    );
-
-}
 
 async function paddle_customer() {
     const resp = await request("/paddle_customer", {
@@ -522,19 +487,71 @@ async function paddle_customer() {
     return resp
 }
 
-async function checkout(priceId) {
-    if (payment_processor === 'paddle_billing') {
-        let resp = await paddle_customer()
+async function paddle_checkout(priceId, successUrl = pay_success_url) {
+    const resp = await paddle_customer()
 
-        if (resp.status === 200) {
-            paddle_checkout(priceId)
-        }
-        else {
-            notify('error', 'paddle customer error')
+    if (resp.status === 200) {
+        let paddleInstance = await initializePaddle(
+            {
+                environment: paddle_billing_environment,
+                token: paddle_billing_client_token
+            })
+
+        if (paddleInstance) {
+            paddleInstance.Checkout.open({
+                items: [{
+                    priceId: priceId,
+                    quantity: 1
+                }],
+                settings: {
+                    displayMode: "overlay",
+                    locale: localeValue,
+                    allowLogout: false,
+                    successUrl: pay_success_url,
+                },
+                customer: {
+                    email: store.userInfo.email,
+                },
+                customData: {
+                    "crm_id": 1,
+                    "utm_source": "web"
+                },
+            });
         }
     }
+    else {
+        notify('error', 'paddle customer error')
+    }
+}
+
+async function stripe_checkout(priceId, successUrl = pay_success_url) {
+    const resp = await request("/stripe_checkout", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            locale: localeValue,
+            price_id: priceId,
+            success_url: successUrl
+        }),
+    });
+
+    if (resp.status === 200) {
+        navigateTo(resp.data.url, { external: true })
+    }
+    else {
+        notify('error', 'stripe pay error')
+    }
+}
+
+
+async function checkout(priceId) {
+    if (payment_processor === 'paddle_billing') {
+        await paddle_checkout(priceId)
+    }
     else if (payment_processor === 'stripe') {
-        stripe_checkout(priceId)
+        await stripe_checkout(priceId)
     }
 }
 
