@@ -11,6 +11,7 @@ import { useRoute } from "vue-router";
 import { useMainStore } from '~/store'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 useHead({
   title: t("title"),
@@ -19,11 +20,12 @@ useHead({
   ]
 })
 
-const params = useRoute().query
+const route = useRoute()
+const params = route.query
+
 const { notify } = useNotify()
 
 if (params.code) {
-
   const resp = await request("/token", {
     method: "POST",
     headers: {
@@ -43,7 +45,8 @@ if (params.code) {
 
     let store = useMainStore()
     await store.setToken(token)
-    // window.history.replaceState({}, '', '/')
+
+    useRouter().replace(localePath('/'))
   } else {
     notify('error', resp.data.errors)
   }
