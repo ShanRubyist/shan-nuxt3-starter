@@ -1,11 +1,15 @@
 <template>
   <h1>{{ t("pay history") }}</h1>
 
-     <UTable :rows="rows" />
+  total: {{ total }}
 
-     <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
-      <UPagination v-model="page" :page-count="pageCount" :total="list.length" />
-    </div>
+  <UTable :rows="rows" :loading="pending"
+    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }"
+    :progress="{ color: 'primary', animation: 'carousel' }" class="w-full" />
+
+  <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+    <UPagination v-model="page" :page-count="pageCount" :total="total" :max="5" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -24,23 +28,39 @@ useHead({
   ]
 })
 
-let {data:list}= await useAsyncData("charges_history", async () => {
-  let resp = await request("/charges_history", {
+let pending = ref(false)
+
+const page = ref(1)
+const pageCount = ref(20)
+
+let { data: list } = await useAsyncData("charges_history", async () => {
+  let resp = await request(`/charges_history?page=${page.value}&per=${pageCount.value}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  pending.value = false
   return resp.data;
 });
+// console.log(list)
 
-console.log(list)
+let total = ref(list.value.total)
+let rows = ref(list.value.charges_history)
 
-const page = ref(1)
-const pageCount = 10
+watch(() => page.value, async (newPage) => {
+  rows.value = ref([])
+  pending.value = true
 
-const rows = computed(() => {
-  return list.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
+  let resp = await request(`/charges_history?page=${newPage}&per=${pageCount.value}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  pending.value = false
+  rows.value = resp.data.charges_history
+  total.value = resp.data.total
 })
 
 </script>
