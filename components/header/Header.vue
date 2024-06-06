@@ -38,7 +38,7 @@
           <div v-if="has_login" class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
             x-bind:class="isOpen ? 'show' : 'hidden'">
 
-            <USelect :options="supportedLocaleNames" model-value="{{locale.name}}" @change="onLocaleChanged">
+            <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged">
               <!-- <template #leading>
                             <UIcon name="i-heroicons-academic-cap" class="w-5 h-5" />
                         </template> -->
@@ -109,6 +109,12 @@ const supportedLocaleNames = computed(() => {
   return locales.value.map(i => i.name)
 })
 
+function getLanguageName(code) {
+  const language = locales.value.find(lang => lang.code === code)
+  return language?.name
+}
+let currentLocale = getLanguageName(locale.value)
+
 const switchLocalePath = useSwitchLocalePath()
 const router = useRouter()
 
@@ -133,7 +139,7 @@ let { data: payment_info } = await useAsyncData("payment_info", async () => {
   return resp.data;
 });
 
-const has_payment = payment_info.value.has_payment
+const has_payment = payment_info?.value?.has_payment
 
 
 let store = useMainStore()
