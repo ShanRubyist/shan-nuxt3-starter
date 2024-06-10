@@ -13,6 +13,10 @@ import { useMainStore } from '~/store'
 const { t } = useI18n()
 const localePath = useLocalePath()
 
+const store = useMainStore()
+const config = useRuntimeConfig().public
+const has_login = config.has_login
+
 useHead({
   title: t("title"),
   meta: [
@@ -51,4 +55,27 @@ if (params.code) {
     notify('error', resp.data.errors)
   }
 }
+else {
+  let { data: user_info } = await useAsyncData("user_info", async () => {
+    if (has_login) {
+      await getUserInfo()
+    }
+  })
+}
+
+async function getUserInfo() {
+  const resp = await request("/api/v1/user_info", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  if (resp.status == 200) {
+    await store.setUserInfo(resp.data)
+  } else {
+    await store.setUserInfo({})
+  }
+}
+
 </script>

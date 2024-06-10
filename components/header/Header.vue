@@ -23,60 +23,71 @@
             x-bind:class="isOpen ? 'show' : 'hidden'">
             <!-- DROPDOWN -->
 
-            <NuxtLink v-if="has_payment" :to="localePath('/pricing')"
-              class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
-              {{ t('pricing') }}
+            <NuxtLink :to="localePath('/')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
+              {{ t('index.entry') }}
             </NuxtLink>
 
-            <NuxtLink :to="localePath('/faqs')"
+            <NuxtLink :to="localePath('/pricing')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
+              {{ t('pricing.entry') }}
+            </NuxtLink>
+
+            <NuxtLink :to="localePath('/faq')"
               class="font-inter rounded-lg pb-8 hover:text-[#c9fd02] lg:px-6 lg:py-4 lg:pb-0">
-              {{ t('faqs') }}
+              {{ t('faq.entry') }}
+            </NuxtLink>
+
+            <NuxtLink :to="localePath('/blog')"
+              class="font-inter rounded-lg pb-8 hover:text-[#c9fd02] lg:px-6 lg:py-4 lg:pb-0">
+              {{ t('blog.entry') }}
             </NuxtLink>
           </div>
 
           <!-- MENU CONTENT 2 -->
-          <div v-if="has_login" class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
+          <div class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
             x-bind:class="isOpen ? 'show' : 'hidden'">
 
-            <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged">
+            <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged" class="flex items-center">
               <!-- <template #leading>
                             <UIcon name="i-heroicons-academic-cap" class="w-5 h-5" />
                         </template> -->
             </USelect>
 
-            <template v-if="store.userInfo.email">
-              <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
-                :popper="{ placement: 'bottom-start' }">
-                <UAvatar :src="store.userInfo.image" />
+            <template v-if="has_login">
 
-                <template #account="{ item }">
-                  <div class="text-left">
-                    <p>
-                      Signed in as
-                    </p>
-                    <p class="truncate font-medium text-gray-900 dark:text-white">
-                      {{ item.label }}
-                    </p>
-                    <p v-if="has_payment">
-                      credit: {{ store.userInfo.credits }}
-                    </p>
-                  </div>
+              <template v-if="store.userInfo.email">
+                <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
+                  :popper="{ placement: 'bottom-start' }">
+                  <UAvatar :src="store.userInfo.image" />
 
-                </template>
+                  <template #account="{ item }">
+                    <div class="text-left">
+                      <p>
+                        {{ t('header.sign-in-as') }}
+                      </p>
+                      <p class="truncate font-medium text-gray-900 dark:text-white">
+                        {{ item.label }}
+                      </p>
+                      <p v-if="has_payment">
+                        {{ t('payment.credit') }}: {{ store.userInfo.credits }}
+                      </p>
+                    </div>
 
-                <template #item="{ item }">
-                  <span class="truncate">{{ item.label }}</span>
+                  </template>
 
-                  <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
-                </template>
-              </UDropdown>
-            </template>
+                  <template #item="{ item }">
+                    <span class="truncate">{{ item.label }}</span>
 
-            <template v-else>
-              <NuxtLink :to="localePath('/auth/login')" target="_blank"
-                class="inline-block rounded-full bg-white px-5 py-3 text-center font-bold text-black transition hover:border-black hover:bg-[#c9fd02]">
-                {{ t('login') }}
-              </NuxtLink>
+                    <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+                  </template>
+                </UDropdown>
+              </template>
+
+              <template v-else>
+                <NuxtLink :to="localePath('/auth/login')" target="_blank"
+                  class="inline-block rounded-full bg-white px-5 py-3 text-center font-bold text-black transition hover:border-black hover:bg-[#c9fd02]">
+                  {{ t('auth.login.entry') }}
+                </NuxtLink>
+              </template>
             </template>
           </div>
           <!-- BURGER MENU -->
@@ -113,7 +124,10 @@ function getLanguageName(code) {
   const language = locales.value.find(lang => lang.code === code)
   return language?.name
 }
-let currentLocale = getLanguageName(locale.value)
+// let currentLocale = getLanguageName(locale.value)
+let currentLocale = computed(() => {
+  return getLanguageName(locale.value)
+})
 
 const switchLocalePath = useSwitchLocalePath()
 const router = useRouter()
@@ -124,10 +138,7 @@ function onLocaleChanged(event: Event) {
   router.push({ path: switchLocalePath(selectedLocale.code) })
 }
 const config = useRuntimeConfig().public
-
 const has_login = config.has_login
-
-
 
 let { data: payment_info } = await useAsyncData("payment_info", async () => {
   let resp = await request("/api/v1/payment_info", {
@@ -143,41 +154,6 @@ const has_payment = payment_info?.value?.has_payment
 
 
 let store = useMainStore()
-
-watch(() => store.token, async (newToken) => {
-  if (has_login) {
-    await store.setToken(newToken)
-    getUserInfo()
-  }
-})
-
-// let email = ref(null)
-// watch(() => store.userInfo, (newUser) => {
-//   if (has_login){
-//     email.value = newUser.email
-//   }
-// })
-
-if (has_login) {
-  // await getUserInfo()
-}
-
-async function getUserInfo(): Promise<void> {
-  const resp = await request("/api/v1/user_info", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    }
-  });
-
-  if (resp.status == 200) {
-    // notify('success', 'get user info success')
-    store.setUserInfo(resp.data)
-  } else {
-    // notify('error', 'get user info failed:' + resp.data.errors)
-    store.setUserInfo({})
-  }
-}
 
 async function logout(): Promise<void> {
   const resp = await request("/auth/sign_out", {
@@ -211,22 +187,22 @@ const items = [
 if (has_payment) {
 
   items.push([{
-    label: 'Payment history',
+    label: t('payment.payment-history.entry'),
     icon: 'i-heroicons-book-open',
     click: () => navigateTo('/payment_history')
   }, {
-    label: 'Usage history',
+    label: t('usage.entry'),
     icon: 'i-heroicons-megaphone',
     click: () => navigateTo('/usage_history')
   }])
 }
 
 items.push([{
-  label: 'Settings',
+  label: t('settings.entry'),
   icon: 'i-heroicons-cog-8-tooth'
 }],
   [{
-    label: 'Sign out',
+    label: t('auth.sign-out.entry'),
     icon: 'i-heroicons-arrow-left-on-rectangle',
     click: () => logout()
   }])
