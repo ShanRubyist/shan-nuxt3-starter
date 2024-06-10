@@ -1,16 +1,25 @@
 <template>
     <template v-if="type == 'account_confirm'">
-        {{ type }}
-        Email sended to {{ email }}
-        <button>go to check email</button>
-        <a>resend</a>
+        <h1>{{ t('auth.email_verifications.h1_account_confirm') }}</h1>
+
+        {{ t('auth.email_verifications.p_account_confirm') }} {{ email }}
+        &nbsp;
+
+        <button>{{ t('auth.email_verifications.check_email') }}</button>
+        &nbsp;
+
+        <a>{{ t('auth.email_verifications.resend') }}</a>
     </template>
     <template v-else-if="type == 'reset_password'">
-        {{ type }}
+        <h1>{{ t('auth.email_verifications.h1_reset_password') }}</h1>
 
-        Email sended to {{ email }}
-        <button>go to check email</button>
-        <a>resend</a>
+        &nbsp;
+
+        {{ t('auth.email_verifications.p_reset_password') }} {{ email }}
+
+        <button>{{ t('auth.email_verifications.check_email') }}</button>
+        &nbsp;
+        <a>{{ t('auth.email_verifications.resend') }}</a>
     </template>
 </template>
 
@@ -19,9 +28,9 @@ import { useRoute } from "vue-router";
 const localePath = useLocalePath()
 const {t} = useI18n()
 useHead({
-  title: t("email_verifications"),
+  title: t("auth.email_verifications.title"),
   meta: [
-    { name: "description", content: t("description") },
+    { name: "description", content: t("auth.email_verifications.description") },
   ]
 })
 

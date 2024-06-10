@@ -4,7 +4,7 @@
             <!-- Title Container -->
             <div class="flex h-auto min-w-[100vw] flex-col items-center justify-end bg-[#f2f2f7] py-6 md:h-64">
                 <div class="flex flex-col items-center gap-y-4 py-5">
-                    <h1 class="text-3xl font-bold md:text-5xl">{{ title }}</h1>
+                    <h1 class="text-3xl font-bold md:text-5xl">{{ md.title }}</h1>
                     <!-- <p class="text-sm text-[#808080] sm:text-base">Last Updated as of October 17, 2022</p> -->
                 </div>
             </div>
@@ -42,6 +42,4 @@ useHead({
     { name: "description", content: md.value.description }
   ]
 })
-
-let title = t(slug.length > 1 ? slug[1] : slug[0]) + ' | ' + config.siteName
 </script>

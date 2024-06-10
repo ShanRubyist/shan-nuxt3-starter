@@ -23,7 +23,7 @@ const i18nHead = useLocaleHead({
 })
 
 useHead({
-  title: t("title"),
+  title: t("seo.title"),
   titleTemplate: (title) => { return title === '' ? config.siteName : `${config.siteName} | ${title}` },
   htmlAttrs: {
     lang: i18nHead.value.htmlAttrs!.lang

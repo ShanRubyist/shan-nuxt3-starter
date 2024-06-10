@@ -7,13 +7,10 @@
         <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
             <!-- Heading Content -->
             <div class="mx-auto max-w-3xl text-center">
-                <h1 class="mb-6 pb-4 text-4xl font-bold text-white md:text-6xl">The Website You Want Without The Dev
-                    Time.</h1>
-                <p class="mx-auto mb-5 max-w-[528px] text-xl text-[#636262] lg:mb-8">Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus</p>
+                <h1 class="mb-6 pb-4 text-4xl font-bold text-white md:text-6xl">{{ t('index.hero.title') }}</h1>
+                <p class="mx-auto mb-5 max-w-[528px] text-xl text-[#636262] lg:mb-8">{{ t('index.hero.note') }}</p>
                 <a href="#"
-                    class="inline-block rounded-full bg-[#c9fd02] px-8 py-4 text-center font-bold text-black transition hover:border-black hover:bg-white">Get
-                    Started</a>
+                    class="inline-block rounded-full bg-[#c9fd02] px-8 py-4 text-center font-bold text-black transition hover:border-black hover:bg-white">{{ t('index.hero.get_start') }}</a>
             </div>
             <!-- Logo Cloud -->
             <div
@@ -42,3 +39,7 @@
         </div>
     </header>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n()
+</script>

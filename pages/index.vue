@@ -18,9 +18,9 @@ const config = useRuntimeConfig().public
 const has_login = config.has_login
 
 useHead({
-  title: t("title"),
+  title: t("index.title"),
   meta: [
-    { name: "description", content: t("description") },
+    { name: "description", content: t("index.description") },
   ]
 })
 

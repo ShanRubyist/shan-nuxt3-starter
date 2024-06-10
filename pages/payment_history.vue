@@ -1,10 +1,10 @@
 <template>
-  <h1>{{ t("pay history") }}</h1>
+  <h1>{{ t("payment.payment_history.h1") }}</h1>
 
-  total: {{ total }}
+  {{ t('payment.payment_history.total_label') }} {{ total }}
 
   <UTable :rows="rows" :loading="pending"
-    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }"
+    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: t('payment.payment_history.loading') }"
     :progress="{ color: 'primary', animation: 'carousel' }" class="w-full" />
 
   <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
@@ -22,9 +22,9 @@ const config = useRuntimeConfig().public
 
 
 useHead({
-  title: t("pay history"),
+  title: t("payment.payment-history.title"),
   meta: [
-    { name: "description", content: t("description") },
+    { name: "description", content: t("payment.payment_history.description") },
   ]
 })
 
@@ -45,8 +45,8 @@ let { data: list } = await useAsyncData("charges_history", async () => {
 });
 // console.log(list)
 
-let total = ref(list.value.total)
-let rows = ref(list.value.charges_history)
+let total = ref(list.value?.total)
+let rows = ref(list.value?.charges_history)
 
 watch(() => page.value, async (newPage) => {
   rows.value = ref([])
@@ -59,8 +59,8 @@ watch(() => page.value, async (newPage) => {
     },
   });
   pending.value = false
-  rows.value = resp.data.charges_history
-  total.value = resp.data.total
+  rows.value = resp.data?.charges_history
+  total.value = resp.data?.total
 })
 
 </script>

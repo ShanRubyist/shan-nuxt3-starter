@@ -283,7 +283,7 @@
                         class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
                         <p class="mr-6">Get Started</p>
                     </a>
-                    <p v-else class="mt-8 inline-block gray">Your current plan</p> -->
+                    <p v-else class="mt-8 inline-block gray">Current plan</p> -->
                     <a @click="checkout(price_1)"
                         class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
                         <p class="mr-6">Get Started</p>
@@ -450,12 +450,12 @@ let { data: payment_info } = await useAsyncData("payment_info", async () => {
     return resp.data;
 });
 
-const payment_processor = payment_info.value.payment_processor
-const paddle_billing_environment = payment_info.value.paddle_billing_environment
-const paddle_billing_client_token = payment_info.value.paddle_billing_client_token
-const price_1 = payment_info.value.price_1
-const price_2 = payment_info.value.price_2
-const price_3 = payment_info.value.price_3
+const payment_processor = payment_info.value?.payment_processor
+const paddle_billing_environment = payment_info.value?.paddle_billing_environment
+const paddle_billing_client_token = payment_info.value?.paddle_billing_client_token
+const price_1 = payment_info.value?.price_1
+const price_2 = payment_info.value?.price_2
+const price_3 = payment_info.value?.price_3
 
 let { data: info } = await useAsyncData("active_subscription_info", async () => {
     let resp = await request("/api/v1/active_subscription_info", {
@@ -467,8 +467,8 @@ let { data: info } = await useAsyncData("active_subscription_info", async () => 
     return resp.data;
 });
 
-const has_active_subscription = info.value.has_active_subscription;
-const active_subscriptions = info.value.active_subscriptions;
+const has_active_subscription = info.value?.has_active_subscription;
+const active_subscriptions = info.value?.active_subscriptions;
 // console.log(active_subscriptions)
 
 const { locale } = useI18n()

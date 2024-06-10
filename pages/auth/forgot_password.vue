@@ -1,10 +1,10 @@
 <template>
-  <div>forgot password</div>
+  <h1>{{ t('auth.forgot_password.h1') }}</h1>
   <input v-model="email" type="email"
     class="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]" maxlength="256"
-    name="name" placeholder="Email Address" required="" />
+    name="name" :placeholder="t('auth.forgot_password.email_placeholder')" required="" />
 
-  <button @click="forgot_password">reset</button>
+  <button @click="forgot_password">{{ t('auth.forgot_password.btn') }}</button>
 </template>
 
 <script setup lang="ts">
@@ -13,9 +13,9 @@ const config = useRuntimeConfig().public
 
 const { t } = useI18n()
 useHead({
-  title: t("forgot_password"),
+  title: t("auth.forgot_password.title"),
   meta: [
-    { name: "description", content: t("description") },
+    { name: "description", content: t("auth.forgot_password.description") },
   ]
 })
 

@@ -1,6 +1,8 @@
 ---
 sitemap:
   loc: 'privacy-policy'
+title: 'Privacy Policy'
+description: ''
 ---
 ***Effective Date: March 27, 2024***
 

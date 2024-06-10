@@ -46,7 +46,8 @@
           <div class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
             x-bind:class="isOpen ? 'show' : 'hidden'">
 
-            <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged" class="flex items-center">
+            <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged"
+              class="flex items-center">
               <!-- <template #leading>
                             <UIcon name="i-heroicons-academic-cap" class="w-5 h-5" />
                         </template> -->
@@ -55,14 +56,14 @@
             <template v-if="has_login">
 
               <template v-if="store.userInfo.email">
-                <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
+                <UDropdown :items="memu_items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
                   :popper="{ placement: 'bottom-start' }">
                   <UAvatar :src="store.userInfo.image" />
 
                   <template #account="{ item }">
                     <div class="text-left">
                       <p>
-                        {{ t('header.sign-in-as') }}
+                        {{ t('header.sign_in_as') }}
                       </p>
                       <p class="truncate font-medium text-gray-900 dark:text-white">
                         {{ item.label }}
@@ -135,7 +136,7 @@ const router = useRouter()
 function onLocaleChanged(event: Event) {
   const selectedLocale = locales.value.find(i => i.name === event)
 
-  router.push({ path: switchLocalePath(selectedLocale.code) })
+  router.push({ path: switchLocalePath(selectedLocale.code), query: useRoute().query })
 }
 const config = useRuntimeConfig().public
 const has_login = config.has_login
@@ -177,33 +178,42 @@ async function logout(): Promise<void> {
 
 }
 
-const items = [
-  [{
-    label: store.userInfo.email,
-    slot: 'account',
-    disabled: true
-  }]]
 
-if (has_payment) {
+const memu_items = computed(() => {
+
+  const items = [
+    [{
+      label: store.userInfo.email,
+      slot: 'account',
+      disabled: true
+    }]
+  ]
+
+  if (has_payment) {
+
+    items.push([{
+      label: t('payment.payment_history.entry'),
+      icon: 'i-heroicons-book-open',
+      click: () => navigateTo(localePath('/payment_history'))
+    }, {
+      label: t('usage.entry'),
+      icon: 'i-heroicons-megaphone',
+      click: () => navigateTo(localePath('/usage'))
+    }])
+  }
 
   items.push([{
-    label: t('payment.payment-history.entry'),
-    icon: 'i-heroicons-book-open',
-    click: () => navigateTo('/payment_history')
-  }, {
-    label: t('usage.entry'),
-    icon: 'i-heroicons-megaphone',
-    click: () => navigateTo('/usage_history')
-  }])
-}
+    label: t('settings.entry'),
+    icon: 'i-heroicons-cog-8-tooth'
+  }],
+    [{
+      label: t('auth.sign_out.entry'),
+      icon: 'i-heroicons-arrow-left-on-rectangle',
+      click: () => logout()
+    }])
 
-items.push([{
-  label: t('settings.entry'),
-  icon: 'i-heroicons-cog-8-tooth'
-}],
-  [{
-    label: t('auth.sign-out.entry'),
-    icon: 'i-heroicons-arrow-left-on-rectangle',
-    click: () => logout()
-  }])
+
+  return items
+})
+
 </script>

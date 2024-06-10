@@ -8,21 +8,20 @@
       <!-- Component -->
       <div class="mx-auto max-w-xl bg-[#f2f2f7] px-5 py-12 text-center md:px-10">
         <!-- Title -->
-        <h2 class="text-3xl font-bold md:text-5xl">Start 14-day free trial</h2>
-        <p class="mx-auto mb-5 mt-4 max-w-xl text-[#647084] md:mb-8">Lorem ipsum dolor sit amet consectetur adipiscing
-          elit ut aliquam,purus sit amet luctus magna fringilla urna</p>
+        <h2 class="text-3xl font-bold md:text-5xl">{{ t('auth.login.h2') }}</h2>
+        <p class="mx-auto mb-5 mt-4 max-w-xl text-[#647084] md:mb-8">{{ t('auth.login.h2_p')}}</p>
         <!-- Button -->
         <a v-if="google_oauth_login" @click="open_google_oauth_link"
           class="mx-auto flex max-w-sm justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
           <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f19d23637f876_GoogleLogo.svg"
             alt="" class="mr-4" />
-          <p class="font-bold">Login with Google</p>
+          <p class="font-bold">{{ t('auth.login.sign_in_with_google')}}</p>
         </a>
         <!-- Devider -->
         <div v-if="email_login && google_oauth_login" class="mx-auto mb-14 mt-14 flex max-w-sm justify-around">
           <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6358f3d7490d1b3d86cf9442_Line%203.svg"
             alt="" class="inline-block" />
-          <p class="text-sm text-[#647084]">or login with email</p>
+          <p class="text-sm text-[#647084]">{{ t('auth.login.sign_in_with_email') }}</p>
           <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6358f3d7490d1b3d86cf9442_Line%203.svg"
             alt="" class="inline-block" />
         </div>
@@ -35,7 +34,7 @@
                 class="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block" />
               <input v-model="email" type="email"
                 class="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
-                maxlength="256" name="name" placeholder="Email Address" required="" />
+                maxlength="256" name="name" :placeholder="t('auth.login.email_placeholder')" required="" />
             </div>
             <div class="relative mb-4 pb-2">
               <img alt=""
@@ -43,11 +42,11 @@
                 class="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block" />
               <input v-model="password" type="password"
                 class="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
-                placeholder="Password (min 8 characters)" required="" />
+                :placeholder="t('auth.login.password_placeholder')" required="" />
             </div>
             <a @click="login"
               class="flex max-w-full grid-cols-2 flex-row items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-              <p class="mr-6 font-bold">Login</p>
+              <p class="mr-6 font-bold">{{ t('auth.login.sign_in') }}</p>
               <div class="h-4 w-4 flex-none">
                 <svg fill="currentColor" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
                   <title>Login</title>
@@ -61,12 +60,12 @@
           </form>
           <p class="text-sm text-[#636262]">
             <NuxtLinkLocale to="/auth/forgot_password"
-              class="font-[Montserrat,_sans-serif] text-sm font-bold text-black">Forgot password?</NuxtLinkLocale>
+              class="font-[Montserrat,_sans-serif] text-sm font-bold text-black">{{ t('auth.forgot_password.entry') }}</NuxtLinkLocale>
           </p>
 
           <p class="text-sm text-[#636262]">
-            Don't have an account? <NuxtLinkLocale to="/auth/signup"
-              class="font-[Montserrat,_sans-serif] text-sm font-bold text-black">{{ $t('sign-up') }}</NuxtLinkLocale>
+            {{ t('auth.login.dont_have_an_account') }} <NuxtLinkLocale to="/auth/signup"
+              class="font-[Montserrat,_sans-serif] text-sm font-bold text-black">{{ $t('auth.signup.entry') }}</NuxtLinkLocale>
           </p>
         </template>
 
@@ -88,9 +87,9 @@ const google_oauth_login = config.google_oauth_login
 
 
 useHead({
-  title: t("login"),
+  title: t("auth.login.title"),
   meta: [
-    { name: "description", content: t("description") },
+    { name: "description", content: t("auth.login.description") },
   ]
 })
 

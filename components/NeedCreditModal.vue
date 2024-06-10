@@ -5,19 +5,19 @@
             <template #header>
                 <div class="flex items-center justify-between">
                     <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-                        Tip
+                        {{ t('need_credit_modal.title') }}
                     </h3>
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
                         @click="$emit('closeModal')" />
                 </div>
             </template>
 
-            <p>You don't has enough credit!</p>
+            <p>{{ t('need_credit_modal.content') }}</p>
 
 
             <template #footer>
                 <div class="flex items-center justify-around">
-                    <UButton color="primary" @click="gotoPay">Charge</UButton>
+                    <UButton color="primary" @click="gotoPay">{{ t('need_credit_modal.pay_btn') }}</UButton>
                 </div>
             </template>
 
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 const props = defineProps(['isOpen'])
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 function gotoPay() {
     navigateTo({
