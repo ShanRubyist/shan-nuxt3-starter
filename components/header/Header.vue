@@ -1,15 +1,8 @@
 <template>
-
-  <!-- Navbar Dropdown 2 rows -->
-
-  <!-- Navbar Dropdown 1 row -->
-
-  <!-- Navbar Dropdown 1 row -->
   <section>
     <div class="h-auto w-screen bg-black text-white">
       <!-- NAVBAR -->
-      <nav class="font-inter mx-auto h-auto w-full max-w-[1600px] lg:relative lg:top-0"
-        x-data="{isOpen: false, menuOne:false}">
+      <nav class="font-inter mx-auto h-auto w-full max-w-[1600px] lg:relative lg:top-0" >
         <!-- CONTAINER -->
         <div class="flex flex-col px-6 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-4 xl:px-20">
           <!-- SVG LOGO - YOU CAN REPLACE THIS -->
@@ -19,10 +12,7 @@
               alt="" class="inline-block max-h-6" />
           </a>
           <!-- MENU CONTENT 1 -->
-          <div class="mt-14 flex flex-col space-y-8 lg:mt-0 lg:flex lg:flex-row lg:space-x-1 lg:space-y-0"
-            x-bind:class="isOpen ? 'show' : 'hidden'">
-            <!-- DROPDOWN -->
-
+          <div :class="{ 'hidden': !isOpen }" class="mt-14 flex flex-col space-y-8 lg:mt-0 lg:flex lg:flex-row lg:space-x-1 lg:space-y-0 lg:show">
             <NuxtLink :to="localePath('/')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
               {{ t('index.entry') }}
             </NuxtLink>
@@ -31,8 +21,7 @@
               {{ t('pricing.entry') }}
             </NuxtLink>
 
-            <NuxtLink :to="localePath('/faq')"
-              class="font-inter rounded-lg pb-8 hover:text-[#c9fd02] lg:px-6 lg:py-4 lg:pb-0">
+            <NuxtLink :to="localePath('/pricing')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
               {{ t('faq.entry') }}
             </NuxtLink>
 
@@ -43,11 +32,10 @@
           </div>
 
           <!-- MENU CONTENT 2 -->
-          <div class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0"
-            x-bind:class="isOpen ? 'show' : 'hidden'">
+          <div :class="{ 'hidden': !isOpen }" class="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0 lg:show">
 
             <USelect :options="supportedLocaleNames" :model-value="currentLocale" @change="onLocaleChanged"
-              class="flex items-center">
+             color="gray" variant="outline" class="flex items-center text-white">
               <!-- <template #leading>
                             <UIcon name="i-heroicons-academic-cap" class="w-5 h-5" />
                         </template> -->
@@ -91,8 +79,9 @@
               </template>
             </template>
           </div>
+
           <!-- BURGER MENU -->
-          <a href="#" class="absolute right-5 lg:hidden" x-on:click.prevent="isOpen = !isOpen">
+          <a href="#" class="absolute right-5 lg:hidden" @click.prevent="isOpen = !isOpen">
             <svg width="1.25rem" height="1rem" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M19 7H1C0.447715 7 0 7.44772 0 8C0 8.55228 0.447715 9 1 9H19C19.5523 9 20 8.55228 20 8C20 7.44772 19.5523 7 19 7Z"
@@ -216,4 +205,5 @@ const memu_items = computed(() => {
   return items
 })
 
+let isOpen = ref(false)
 </script>
