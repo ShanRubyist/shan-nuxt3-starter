@@ -1,22 +1,24 @@
 <template>
-    <section>
-        <div class="flex flex-col items-center justify-center px-5 md:px-10">
-            <!-- Title Container -->
-            <div class="flex h-auto min-w-[100vw] flex-col items-center justify-end bg-[#f2f2f7] py-6 md:h-64">
-                <div class="flex flex-col items-center gap-y-4 py-5">
-                    <h1 class="text-3xl font-bold md:text-5xl">{{ md.title }}</h1>
-                    <!-- <p class="text-sm text-[#808080] sm:text-base">Last Updated as of October 17, 2022</p> -->
-                </div>
-            </div>
-            <!-- Content Container -->
-            <div class="mx-auto w-full max-w-5xl py-12 md:py-16 lg:py-20">
+  <section>
+    <div class="flex flex-col items-center justify-center px-5 md:px-10">
+      <!-- Title Container -->
+      <div class="flex h-auto min-w-[100vw] flex-col items-center justify-end bg-[#f2f2f7] py-6 md:h-64">
+        <div class="flex flex-col items-center gap-y-4 py-5">
+          <h1 class="text-3xl font-bold md:text-5xl">{{ md.title }}</h1>
+          <!-- <p class="text-sm text-[#808080] sm:text-base">Last Updated as of October 17, 2022</p> -->
 
-                <!-- Content -->
-                <!-- <ContentDoc class="prose" /> -->
-                <ContentRendererMarkdown :value="md" :data="mdcVars" class="prose"/>
-            </div>
+          <UBreadcrumb :links="links" />
         </div>
-    </section>
+      </div>
+      <!-- Content Container -->
+      <div class="mx-auto w-full max-w-5xl py-12 md:py-16 lg:py-20">
+
+        <!-- Content -->
+        <!-- <ContentDoc class="prose" /> -->
+        <ContentRendererMarkdown :value="md" :data="mdcVars" class="prose" />
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +26,8 @@
 let { slug } = useRoute().params
 const { locale, t } = useI18n()
 const config = useRuntimeConfig().public
+const localePath = useLocalePath()
+
 
 const { data: md } = await useAsyncData(() => queryContent(locale.value || config.defaultLocale, ...slug).findOne());
 if (!md.value) {
@@ -31,15 +35,33 @@ if (!md.value) {
 }
 
 const mdcVars = ref({
-    site_name: config.siteName,
-    email: config.email,
-    site_url: config.siteURL
+  site_name: config.siteName,
+  email: config.email,
+  site_url: config.siteURL
 });
 
 useHead({
-    title: md.value.title,
-    meta: [
+  title: md.value.title,
+  meta: [
     { name: "description", content: md.value.description }
   ]
 })
+
+const links = [{
+  label: 'Home',
+  icon: 'i-heroicons-home',
+  to: localePath('/')
+}]
+
+let current_slug = ''
+slug.forEach(i => {
+  links.push({
+    label: i,
+    icon: 'i-heroicons-link',
+    to: localePath(`${current_slug}/${i}`)
+  })
+
+  current_slug = `${current_slug}/${i}`
+});
+
 </script>

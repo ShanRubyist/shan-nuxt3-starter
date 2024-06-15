@@ -41,7 +41,11 @@
   "blog": {
     "entry": "Blog",
     "title": "a good app",
-    "description": "this is a good app"
+    "description": "this is a good app",
+    "no_article_found": "No articles found.",
+    "h2": "The latest and greatest news",
+    "h2_p": "Lorem ipsum dolor sit amet elit ut aliquam",
+    "tag": "Hot"
   },
   "header": {
     "sign_in_as": "Signed in as"
