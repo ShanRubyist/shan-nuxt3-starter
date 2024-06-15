@@ -16,7 +16,7 @@
 
 import request from "@/utils/request";
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const config = useRuntimeConfig().public
 
@@ -33,8 +33,10 @@ let pending = ref(false)
 const page = ref(1)
 const pageCount = ref(20)
 
+let localeValue = locale.value || config.defaultLocale
+
 let { data: list } = await useAsyncData("charges_history", async () => {
-  let resp = await request(`/charges_history?page=${page.value}&per=${pageCount.value}`, {
+  let resp = await request(`/charges_history?locale=${localeValue}&page=${page.value}&per=${pageCount.value}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
