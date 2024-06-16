@@ -1,7 +1,7 @@
 <template>
   <section>
     <!-- Container -->
-    <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
+    <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-16 lg:py-16">
       <!-- Component -->
       <div class="flex flex-col items-center">
         <!-- Heading Div -->
@@ -9,6 +9,13 @@
           <h2 class="mb-4 mt-6 text-3xl font-extrabold md:text-5xl">{{ t('blog.h2') }}</h2>
           <p class="mx-auto mt-4 max-w-[528px] text-[#636262]">{{ t('blog.h2_p') }}</p>
         </div>
+
+        <!-- Search -->
+        <div class="flex flex-col items-center w-full mb-8 md:mb-12 lg:mb-16">
+          <UInput icon="i-heroicons-magnifying-glass-20-solid" size="sm" color="white" trailing
+            :placeholder="t('blog.search_placeholder')" v-model="search" @keyup.enter="search_blog" />
+        </div>
+
         <!-- Blog Content -->
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
@@ -58,6 +65,7 @@ const config = useRuntimeConfig().public
 let current_locale = locale.value || config.defaultLocale
 
 let path = `${current_locale}/blog`
+let search = ref('')
 
 useHead({
   title: t("blog.title"),
@@ -69,7 +77,7 @@ useHead({
 const page = ref(1)
 const pageCount = ref(9)
 
-const { data: total_blog_posts_count } = await useAsyncData(() => queryContent(path).count());
+const { data: total_blog_posts_count } = await useAsyncData(() => get_total_blog_posts_count());
 
 const { data: blog_posts } = await useAsyncData(() => get_blog_posts())
 watch(() => page.value, async (newPage) => {
@@ -77,8 +85,33 @@ watch(() => page.value, async (newPage) => {
   blog_posts.value = resp
 })
 
+async function search_blog() {
+  total_blog_posts_count.value = await get_total_blog_posts_count()
+
+  blog_posts.value = await get_blog_posts()
+}
+
+function where_query(query) {
+  return query
+    .where({
+      $or: [
+        { 'title': { $contains: search.value } },
+        { 'description': { $contains: search.value } },
+        { 'body.children.0.children.0.value': { $contains: search.value } }
+      ]
+    })
+}
+
 function get_blog_posts() {
-  return queryContent(path).sort({ date: -1 }).skip((page.value - 1) * pageCount.value).limit(pageCount.value).find()
+  return where_query(queryContent(path))
+    .sort({ date: -1 })
+    .skip((page.value - 1) * pageCount.value)
+    .limit(pageCount.value)
+    .find()
+}
+
+function get_total_blog_posts_count() {
+  return where_query(queryContent(path)).count()
 }
 
 function article_url(article_path: string) {
