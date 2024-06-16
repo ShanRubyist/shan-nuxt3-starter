@@ -21,7 +21,7 @@
               {{ t('pricing.entry') }}
             </NuxtLink>
 
-            <NuxtLink :to="localePath('/pricing')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
+            <NuxtLink :to="localePath('/faq')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
               {{ t('faq.entry') }}
             </NuxtLink>
 
