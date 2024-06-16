@@ -4,7 +4,7 @@
       <!-- Title Container -->
       <div class="flex h-auto min-w-[100vw] flex-col items-center justify-end bg-[#f2f2f7] py-6 md:h-64">
         <div class="flex flex-col items-center gap-y-4 py-5">
-          <h1 class="text-3xl font-bold md:text-5xl">{{ md.title }}</h1>
+          <h1 class="text-3xl font-bold md:text-5xl">{{ md?.title || slug[slug.length - 1] }}</h1>
           <!-- <p class="text-sm text-[#808080] sm:text-base">Last Updated as of October 17, 2022</p> -->
 
           <UBreadcrumb :links="links" />
@@ -15,7 +15,12 @@
 
         <!-- Content -->
         <!-- <ContentDoc class="prose" /> -->
-        <ContentRendererMarkdown :value="md" :data="mdcVars" class="prose" />
+        <template v-if="md">
+          <ContentRendererMarkdown :value="md" :data="mdcVars" class="prose" />
+        </template>
+        <template v-else>
+          {{ t('slug.page_not_found') }}
+        </template>
       </div>
     </div>
   </section>
@@ -31,7 +36,8 @@ const localePath = useLocalePath()
 
 const { data: md } = await useAsyncData(() => queryContent(locale.value || config.defaultLocale, ...slug).findOne());
 if (!md.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  // throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  console.log(`Page not found: ${slug}`)
 }
 
 const mdcVars = ref({
@@ -41,12 +47,12 @@ const mdcVars = ref({
 });
 
 useHead({
-  title: md.value.title,
+  title: md?.value?.title || t('seo.title'),
   meta: [
-    { name: "description", content: md.value.description }
+    { name: "description", content: md?.value?.description || t('seo.description') }
   ]
 })
-
+console.log(slug)
 const links = [{
   label: 'Home',
   icon: 'i-heroicons-home',
@@ -55,13 +61,13 @@ const links = [{
 
 let current_slug = ''
 slug.forEach(i => {
+  current_slug = `${current_slug}/${i}`
+
   links.push({
     label: i,
     icon: 'i-heroicons-link',
-    to: localePath(`${current_slug}/${i}`)
+    to: localePath(current_slug)
   })
-
-  current_slug = `${current_slug}/${i}`
 });
 
 </script>
