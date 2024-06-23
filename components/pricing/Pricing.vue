@@ -1,430 +1,205 @@
 <template>
-
-    <!-- Section Pricing -->
-    <section>
-        <!-- Pricing Container-->
-        <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
-            <!-- Pricing Title -->
-            <div class="text-center">
-                <h2 class="text-3xl font-bold md:text-5xl">Simple & Affordable Pricing</h2>
-                <p class="mx-auto">Simple & fixed pricing. 30 days money-back guarantee</p>
+    <section class="bg-white text-zinc-900 py-8 sm:py-16">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-16">
+            <div class="mb-8 md:mb-12">
+                <h2 class="max-w-xl text-center mx-auto text-5xl font-bold mb-4">Prices, simple and suited for all your
+                    needs</h2>
+                <p class="max-w-screen-sm text-center text-base mx-auto text-zinc-500 mb-8">Discover transparent and
+                    flexible pricing tailored to meet your unique requirements. Our straightforward and customizable
+                    plans ensure you get precisely what you need.</p>
                 <p class="mx-auto mb-8 mt-4 max-w-lg text-[#636262] md:mb-12 lg:mb-16">
                     For inquiries or assistance, please contact us at
                     <a :href="'mailto:' + email" class="text-blue-500">{{ email }}</a>
                 </p>
             </div>
-            <!-- Pricing Table -->
-            <div class="hidden text-center md:block">
+            <div class="max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-6 items-center">
                 <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-8 pt-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] mb-8">
-                    <div></div>
-                    <div>
-                        <a href="#"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
+                    class="bg-white rounded-lg p-2 border border-solid border-zinc-100 md:data-[primary=true]:-mx-4 md:data-[primary=true]:z-[100] shadow-xl">
+                    <div
+                        class="bg-zinc-100 rounded-md p-6 text-blue-900 from-blue-400 to-blue-600 data-[primary=true]:bg-gradient-to-bl data-[primary=true]:text-white data-[primary=true]:py-10">
+                        <h3 class="text-sm font-medium mb-1">Starter</h3>
+                        <!-- <div class="flex items-end"><span
+                                class="text-3xl font-bold leading-none">$45</span><span
+                                class="opacity-50 text-xs ml-2 select-none leading-5">/ year</span>
+                            </div> -->
+                        <div class="mt-6">
+                            <button @click="checkout(price_1)"
+                                class="h-10 text-sm font-medium rounded text-blue-900 text-center w-full bg-white active:scale-95 transition-transform">
+                                Current plan
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <a @click="checkout(price_1)"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
-                    <div>
-                        <a @click="checkout(price_2)"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
-                    <div>
-                        <a @click="checkout(price_3)"
-                            class="inline-block border-2 border-solid border-black px-6 py-4 text-center font-semibold text-black transition [box-shadow:rgb(0,_0,0)-8px_8px] hover:[box-shadow:rgb(0,_0,_0)_0px_0px]">Get
-                            Started</a>
-                    </div>
+                    <ul class="flex flex-col gap-4 p-6 py-6">
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>10 GB storage</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Basic Integrations</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Standard Encryption</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Standard Support</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Email Support</p>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-4">
-                    <div class=""></div>
-                    <div class="">
-                        <p class="text-sm">Free</p>
-                        <p class="text-3xl font-bold">$0</p>
-                        <p class="text-sm font-semibold">Per month</p>
+                <div class="bg-white rounded-lg p-2 border border-solid border-zinc-100 md:data-[primary=true]:-mx-4 md:data-[primary=true]:z-[100] shadow-xl"
+                    data-primary="true">
+                    <div class="bg-zinc-100 rounded-md p-6 text-blue-900 from-blue-400 to-blue-600 data-[primary=true]:bg-gradient-to-bl data-[primary=true]:text-white data-[primary=true]:py-10"
+                        data-primary="true">
+                        <h3 class="text-sm font-medium mb-1">Business</h3>
+                        <div class="flex items-end"><span
+                                class="text-3xl font-bold leading-none">$<!-- -->95</span><span
+                                class="opacity-50 text-xs ml-2 select-none leading-5">/ year</span></div>
+                        <div class="mt-6">
+                            <button @click="checkout(price_2)"
+                                class="h-10 text-sm font-medium rounded text-blue-900 text-center w-full bg-white active:scale-95 transition-transform">
+                                Get started</button>
+                        </div>
                     </div>
-                    <div class="">
-                        <p class="text-sm">Starter</p>
-                        <p class="text-3xl font-bold">$99</p>
-                        <p class="text-sm font-semibold">Per month</p>
-                    </div>
-                    <div class="">
-                        <p class="text-sm">Agency</p>
-                        <p class="text-3xl font-bold">$199</p>
-                        <p class="text-sm font-semibold">Per month</p>
-                    </div>
-                    <div class="">
-                        <p class="text-sm">Enterprise</p>
-                        <p class="text-3xl font-bold">$299</p>
-                        <p class="text-sm font-semibold">Per month</p>
-                    </div>
+                    <ul class="flex flex-col gap-4 p-6 py-6">
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>50 GB storage</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Advanced Integrations</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Two-Factor Authentication</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Enhanced analytics</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>24/7 Chat &amp; Email</p>
+                        </li>
+                    </ul>
                 </div>
                 <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-8 py-8 [border-bottom:1px_solid_rgb(233,_240,_241)] lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div class="flex items-center">
-                        <p class="font-semibold">Website Number</p>
-                        <div class="ml-2">
-                            <div
-                                class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                ?</div>
+                    class="bg-white rounded-lg p-2 border border-solid border-zinc-100 md:data-[primary=true]:-mx-4 md:data-[primary=true]:z-[100] shadow-xl">
+                    <div
+                        class="bg-zinc-100 rounded-md p-6 text-blue-900 from-blue-400 to-blue-600 data-[primary=true]:bg-gradient-to-bl data-[primary=true]:text-white data-[primary=true]:py-10">
+                        <h3 class="text-sm font-medium mb-1">Enterprise</h3>
+                        <div class="flex items-end"><span
+                                class="text-3xl font-bold leading-none from-blue-400 to-blue-600 bg-gradient-to-br text-transparent bg-clip-text">Let's
+                                talk</span></div>
+                        <div class="mt-6">
+                            <button @click="checkout(price_3)"
+                                class="h-10 text-sm font-medium rounded text-blue-900 text-center w-full bg-white active:scale-95 transition-transform">Contact
+                                us</button>
                         </div>
                     </div>
-                    <p>01</p>
-                    <p>10</p>
-                    <p>50</p>
-                    <p>Unlimited</p>
-                </div>
-                <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] py-8 [border-bottom:1px_solid_rgb(233,_240,_241)] lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div class="flex items-center">
-                        <p class="font-semibold">Server Storage</p>
-                        <div class="ml-2">
-                            <div
-                                class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                ?</div>
-                        </div>
-                    </div>
-                    <p>100GB</p>
-                    <p>200GB</p>
-                    <p>1TB</p>
-                    <p>Unlimited</p>
-                </div>
-                <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] py-8 [border-bottom:1px_solid_rgb(233,_240,_241)] lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div class="flex items-center">
-                        <p class="font-semibold">Team Members</p>
-                        <div class="ml-2">
-                            <div
-                                class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                ?</div>
-                        </div>
-                    </div>
-                    <p>01</p>
-                    <p>20</p>
-                    <p>50</p>
-                    <p>Unlimited</p>
-                </div>
-                <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] py-8 [border-bottom:1px_solid_rgb(233,_240,_241)] lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div class="flex items-center">
-                        <p class="font-semibold">Access to Email API</p>
-                        <div class="ml-2">
-                            <div
-                                class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                ?</div>
-                        </div>
-                    </div>
-                    <p>-</p>
-                    <p>-</p>
-                    <div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                    <div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                </div>
-                <div
-                    class="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] py-8 [border-bottom:1px_solid_rgb(233,_240,_241)] lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
-                    <div class="flex items-center">
-                        <p class="font-semibold">Access to Storage API</p>
-                        <div class="ml-2">
-                            <div
-                                class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                ?</div>
-                        </div>
-                    </div>
-                    <p>-</p>
-                    <p>-</p>
-                    <p>-</p>
-                    <div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                </div>
-            </div>
-            <!-- Pricing Table Mobile -->
-            <div class="block md:hidden">
-                <!-- Pricing Table Item -->
-                <div>
-                    <div class="pb-4 pt-12 [border-bottom:1px_solid_rgb(233,_240,_241)]">
-                        <p class="text-sm">Free</p>
-                        <p class="text-3xl font-bold">$0</p>
-                        <p class="text-sm font-semibold">per month</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Website Number</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>01</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Server Storage</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>100GB</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Team Members</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>01</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Email API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>-</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Storage API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>-</p>
-                    </div>
-                    <a href="#"
-                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6">Get Started</p>
-                    </a>
-                </div>
-                <!-- Pricing Table Item -->
-                <div>
-                    <div class="pb-4 pt-12 [border-bottom:1px_solid_rgb(233,_240,_241)]">
-                        <p class="text-sm">Starter</p>
-                        <p class="text-3xl font-bold">$99</p>
-                        <p class="text-sm font-semibold">per month</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Website Number</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>10</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Server Storage</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>200GB</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Team Members</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>10</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Email API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>-</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Storage API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>-</p>
-                    </div>
-                    <!-- <a v-if='has_active_subscription' @click="checkout(price_1)" 
-                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6">Get Started</p>
-                    </a>
-                    <p v-else class="mt-8 inline-block gray">Current plan</p> -->
-                    <a @click="checkout(price_1)"
-                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6">Get Started</p>
-                    </a>
-                </div>
-                <!-- Pricing Table Item -->
-                <div>
-                    <div class="pb-4 pt-12 [border-bottom:1px_solid_rgb(233,_240,_241)]">
-                        <p class="text-sm">Agency</p>
-                        <p class="text-3xl font-bold">$199</p>
-                        <p class="text-sm font-semibold">per month</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Website Number</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>50</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Server Storage</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>1TB</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Team Members</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>20</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Email API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Storage API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>-</p>
-                    </div>
-                    <a @click="checkout(price_2)"
-                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6">Get Started</p>
-                    </a>
-                </div>
-                <!-- Pricing Table Item -->
-                <div>
-                    <div class="pb-4 pt-12 [border-bottom:1px_solid_rgb(233,_240,_241)]">
-                        <p class="text-sm">Enterprise</p>
-                        <p class="text-3xl font-bold">$299</p>
-                        <p class="text-sm font-semibold">per month</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Website Number</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>Unlimited</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Server Storage</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>Unlimited</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Team Members</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <p>Unlimited</p>
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Email API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                    <div class="grid gap-8 py-4 [border-bottom:1px_solid_rgb(233,_240,_241)] md:py-8">
-                        <div class="flex items-center">
-                            <p class="font-semibold">Access to Storage API</p>
-                            <div class="ml-2">
-                                <div
-                                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-[50%] bg-[#e9f0f1] text-xs font-bold text-[#0b0b1f54]">
-                                    ?</div>
-                            </div>
-                        </div>
-                        <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6357722e2a5f199a0337f863_Vector (2).svg"
-                            alt="" class="inline-block" />
-                    </div>
-                    <a @click="checkout(price_3)"
-                        class="mt-8 inline-block bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6">Get Started</p>
-                    </a>
+                    <ul class="flex flex-col gap-4 p-6 py-6">
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Min 100 GB storage</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Custom API Integrations</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Enterprise-Grade Security</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Premium analytics</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-4 h-4 p-0.5 bg-zinc-100 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke="#3b67e4"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg></div>
+                            <p>Priority Phone &amp; Chat</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
