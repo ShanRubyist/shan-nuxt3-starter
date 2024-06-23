@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@iconify-json/simple-icons": "^1.1.106",
     "@nuxt/content": "^2.12.1",
     "@nuxt/ui": "^2.15.2",
     "@paddle/paddle-js": "^1.0.3",

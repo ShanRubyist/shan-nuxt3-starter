@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+  ui: {
+    icons: ['simple-icons']
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxt/ui", "@nuxtjs/sitemap", "@nuxt/content", "@nuxtjs/i18n", "@pinia/nuxt"],
 
@@ -92,6 +96,11 @@ export default defineNuxtConfig({
       email_login: process.env.NUXT_PUBLIC_EMAIL_LOGIN,
       google_oauth_login: process.env.NUXT_PUBLIC_GOOGLE_OAUTH_LOGIN,
       pay_success_url: process.env.NUXT_PUBLIC_PAY_SUCCESS_URL,
+      x: process.env.NUXT_PUBLIC_X,
+      discord: process.env.NUXT_PUBLIC_DISCORD,
+      github: process.env.NUXT_PUBLIC_GITHUB,
+      coffee: process.env.NUXT_PUBLIC_COFFEE,
+
     },
   },
 
