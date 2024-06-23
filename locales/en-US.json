@@ -1,13 +1,18 @@
 {
   "seo": {
-    "title": "a good app"
+    "title": "Online Morse Code Translator, Decoder, Generator, Converter",
+    "description":"Morse Code Translator is a Morse Code Decoder, Generator, Converter to translate Morse Code to text, or translate text to Morse Code."
   },
   "index": {
     "entry": "Home",
     "title": "a good app",
     "description": "this is a good app",
     "hero": {
-      "title": "The Website You Want Without The Dev Time.",
+      "h1": {
+        "part1": "It's your",
+        "part2": "all-in-one",
+        "part3": "project solution",
+      },
       "note": "111",
       "get_start": "Get Started"
     },
@@ -45,7 +50,8 @@
     "no_article_found": "No articles found.",
     "h2": "The latest and greatest news",
     "h2_p": "Lorem ipsum dolor sit amet elit ut aliquam",
-    "tag": "Hot"
+    "tag": "Hot",
+    "search_placeholder": "Search..."
   },
   "header": {
     "sign_in_as": "Signed in as"
@@ -141,5 +147,8 @@
     "entry": "Settings",
     "title": "a good app",
     "description": "this is a good app"
+  },
+  "slug": {
+    "page_not_found": "Page not found"
   }
 }
