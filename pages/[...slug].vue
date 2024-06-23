@@ -36,7 +36,7 @@ const localePath = useLocalePath()
 
 const { data: md } = await useAsyncData(() => queryContent(locale.value || config.defaultLocale, ...slug).findOne());
 if (!md.value) {
-  // throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
   console.log(`Page not found: ${slug}`)
 }
 
