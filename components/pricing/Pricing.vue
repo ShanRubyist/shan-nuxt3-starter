@@ -498,6 +498,10 @@ async function paddle_checkout(priceId, successUrl = pay_success_url) {
             })
 
         if (paddleInstance) {
+            // paddle billing 的中文只有简体中文，繁体中文也会显示简体中文中文
+            // 参考链接：https://developer.paddle.com/paddlejs/methods/paddle-checkout-open
+            if(localeValue == 'zh') { localeValue = 'zh-Hans'}
+
             paddleInstance.Checkout.open({
                 items: [{
                     priceId: priceId,

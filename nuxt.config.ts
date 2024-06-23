@@ -45,9 +45,9 @@ export default defineNuxtConfig({
     },
     {
       name: '繁體中文',
-      code: 'hk',
-      iso: 'zh-HK',
-      file: 'zh-HK.json'
+      code: 'zh-TW',
+      iso: 'zh-TW',
+      file: 'zh-TW.json'
     },
     {
       name: '한국어',
