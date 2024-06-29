@@ -72,7 +72,7 @@
               </template>
 
               <template v-else>
-                <NuxtLink :to="localePath('/auth/login')" target="_blank"
+                <NuxtLink :to="localePath('/auth/login')" target="_self"
                   class="inline-block rounded-full bg-white px-5 py-3 text-center font-bold text-black transition hover:border-black hover:bg-[#c9fd02]">
                   {{ t('auth.login.entry') }}
                 </NuxtLink>
