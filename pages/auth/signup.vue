@@ -51,6 +51,8 @@
                 class="mb-4 block h-9 w-full border border-black bg-white px-3 py-6 pl-14 text-sm text-[#333333]"
                 :placeholder="t('auth.signup.confirm_password_placeholder')" required="" />
             </div>
+            <span v-if="errorMessages.confirm_password" class="text-red-500">{{ errorMessages.confirm_password }}</span>
+
             <a @click="signup"
               class="flex max-w-full grid-cols-2 flex-row items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
               <p class="mr-6 font-bold">{{ t('auth.signup.sign_up') }}</p>
@@ -92,8 +94,8 @@ useHead({
 })
 
 let email: string;
-let password: string;
-let confirm_password: string;
+let password: string = ref('');
+let confirm_password: string = ref('');
 
 
 async function signup(): Promise<void> {
@@ -106,8 +108,8 @@ async function signup(): Promise<void> {
     },
     body: JSON.stringify({
       email: email,
-      password: password,
-      confirm_password: confirm_password,
+      password: password.value,
+      confirm_password: confirm_password.value,
       confirm_success_url: localePath(config.siteURL + "/auth/email_verifications")
     }),
   });
@@ -132,4 +134,13 @@ let { open_google_oauth_link } = useGoogleOAuth()
 const email_login = config.email_login
 const google_oauth_login = config.google_oauth_login
 
+let errorMessages = computed(() => {
+  let rst = ref({})
+
+  if (password.value != confirm_password.value) {
+    rst.confirm_password = t('auth.signup.confirm_password_not_match')
+  }
+
+  return rst
+})
 </script>

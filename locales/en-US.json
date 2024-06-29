@@ -77,7 +77,8 @@
       "email_placeholder": "Email",
       "password_placeholder": "Password (min 8 characters)",
       "confirm_password_placeholder": "Password Confirm",
-      "sign_up": "Sign Up"
+      "sign_up": "Sign Up",
+      "confirm_password_not_match": "Confirm password not match"
     },
     "login": {
       "entry": "Sign in",
