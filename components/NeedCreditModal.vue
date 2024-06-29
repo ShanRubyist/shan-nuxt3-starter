@@ -1,5 +1,5 @@
 <template>
-    <UModal v-model="props.isOpen">
+    <UModal v-model="props.isOpen" fullscreen>
         <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
 
             <template #header>
@@ -12,14 +12,7 @@
                 </div>
             </template>
 
-            <p>{{ t('need_credit_modal.content') }}</p>
-
-
-            <template #footer>
-                <div class="flex items-center justify-around">
-                    <UButton color="primary" @click="gotoPay">{{ t('need_credit_modal.pay_btn') }}</UButton>
-                </div>
-            </template>
+            <Pricing />
 
         </UCard>
     </UModal>
@@ -27,13 +20,5 @@
 
 <script setup lang="ts">
 const props = defineProps(['isOpen'])
-const localePath = useLocalePath()
 const { t } = useI18n()
-
-function gotoPay() {
-    navigateTo({
-        path: localePath("/pricing")
-    });
-}
-
 </script>
