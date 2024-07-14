@@ -6,7 +6,14 @@ export default defineNuxtConfig({
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/ui", "@nuxtjs/sitemap", "@nuxt/content", "@nuxtjs/i18n", "@pinia/nuxt"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/sitemap",
+    "@nuxt/content",
+    "@nuxtjs/i18n",
+    "@pinia/nuxt",
+    "nuxt-gtag"
+  ],
 
   colorMode: {
     preference: 'system'
@@ -116,5 +123,9 @@ export default defineNuxtConfig({
     // middleware: "auth",
   },
 
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+
+  gtag: {
+    id: process.env.GTAG_ID
+  }
 })
