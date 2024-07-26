@@ -1,6 +1,8 @@
 ---
 sitemap:
   loc: 'terms-of-service'
+title: 'Terms Of Service'
+description: ''
 ---
 ***Effective Date: March 27, 2024***
 
