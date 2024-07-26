@@ -17,7 +17,7 @@
               {{ t('index.entry') }}
             </NuxtLink>
 
-            <NuxtLink :to="localePath('/pricing')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
+            <NuxtLink v-if="has_payment" :to="localePath('/pricing')" class="font-inter rounded-lg hover:text-[#c9fd02] lg:px-6 lg:py-4">
               {{ t('pricing.entry') }}
             </NuxtLink>
 
